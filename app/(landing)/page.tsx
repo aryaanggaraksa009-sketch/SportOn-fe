@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { TbShoppingBagExclamation } from "react-icons/tb";
+import HeroSection from "./components/home/hero";
 
 export default function Home() {
-  return ( <main className="bg-primary">
-    <h1 className="font-extrabold">Welcome to SportOn</h1>
-  </main>);
-  <TbShoppingBagExclamation />
+  return ( 
+  <main>
+    <HeroSection/>
+  </main>
+  );
 }
