@@ -11,7 +11,7 @@
   --color-dark-alternate: var(--dark-alternate);
   --color-primary: var(--primary);
   --color-primary-light: var(--primary-light);
-  --font-family-poppins: var(--font-poppins);
+  --font-poppins: var(--font-poppins);
 }
 
 *{
