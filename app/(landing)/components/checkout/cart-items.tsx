@@ -1,43 +1,18 @@
- 
- import priceFormatter from "@/app/utils/price-formatter";
+import { FiArrowRight, FiCreditCard, FiTrash2 } from "react-icons/fi";
+import Button from "../ui/button";
+import { cartList } from "../ui/cart-popup";
+import priceFormatter from "@/app/utils/price-formatter";
 import Image from "next/image";
-import Button from "./button";
-import { FiArrowRight, FiTrash2 } from "react-icons/fi";
-import { totalmem } from "os";
- 
-export const cartList = [
-    {
-        name: "SportOn product 1",
-        category: "Running",
-        price:230000,
-        qty: 4,
-        imgUrl: "product-1.png",
-    },
-    {
-        name: "SportOn product 2",
-        category: "Running",
-        price:250000,
-        qty: 2,
-        imgUrl: "product-2.png",
-    },
-     {
-        name: "SportOn product 3",
-        category: "Running",
-        price:350000,
-        qty: 1,
-        imgUrl: "product-3.png",
-    },
- ];
- 
 
-const CartPopup = () => {
+const CartItems = () => {
     const totalPrice = cartList.reduce((total, item) => total + item.price * item.qty, 0);
     return (
-        <div className="absolute bg-white right-0 top-12 shadow-xl shadow-black-10 border border-gray-200 w-90 z-10">
-            <div className="p-4 border-b border-gray-200 font-bold text-center">
-                Shopping Cart
+        <div className="relative bg-white w-150">
+            <div className="px-5 py-4 border-b border-gray-200">
+                <h2 className="font-bold text-lg">Cart Items</h2>
             </div>
-            {
+            <div className="overflow-auto max-h-[300px]">
+                {
             cartList.map((item, index) => (
               <div className="border-b border-gray-200 p-2 flex gap-3" key={index}>
                 <div className="bg-primary-light aspect-square w-16 flex justify-center item-center">
@@ -60,18 +35,19 @@ const CartPopup = () => {
                 </Button>
               </div>
             ))}
+            </div>
             <div className="border-t border-gray-200 p-4">
                 <div className="flex justify-between font-semibold">
                     <div className="font-semibold text-sm">Total</div>
                     <div className="text-primary text-xs">{priceFormatter(totalPrice)}
                     </div>
                 </div>
-                <Button variant="dark" size="small" className="w-full mt-4">
-                    Checkout Now <FiArrowRight />
+                <Button variant="dark" className="w-full mt-4">
+                   <FiCreditCard /> Proceed to Payment
                 </Button>
             </div>
         </div>
     );
 };
 
-export default CartPopup;
+export default CartItems;
