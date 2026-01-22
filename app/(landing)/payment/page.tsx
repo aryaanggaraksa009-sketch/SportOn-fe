@@ -1,3 +1,7 @@
+import { MdPayment } from "react-icons/md";
+import PaymentOptions from "../components/payment/payment-options";
+import PaymentSteps from "../components/payment/payment-steps";
+
 const Payment = () => {
     return (
         <main className="bg-gray-100 min-h-[80vh]">
@@ -6,6 +10,8 @@ const Payment = () => {
                     Payment
                 </h1>
                 <div className="grid grid-cols-2 gap-14">
+                    <PaymentOptions/>
+                    <PaymentSteps />
                 </div>
             </div>
         </main>

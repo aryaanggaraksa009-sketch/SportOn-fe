@@ -1,23 +1,25 @@
+import CardWithHeader from "../ui/card-with-header";
+
 const OrderInformation = () => {
     return (
-        <div className="relative left-50 bg-white w-150">
-            <div className="px-5 py-4 border-b border-gray-200">
-                <h2 className="font-bold text-lg">Order Information</h2>
-            </div>
-            <div className="p-5">
-                <div className="input-group">
-                    <label htmlFor="full-name">Full Name</label>
-                    <input type="text" placeholder="Type your full name" id="full_name"/>
+        <div className="flex justify-end item-center">
+            <CardWithHeader title="Order Information">
+                <div className="p-5">
+                    <div className="input-group">
+                        <label htmlFor="full-name">Full Name</label>
+                        <input type="text" placeholder="Type your full name" id="full_name"/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="wa_number">Whatsapp Number</label>
+                        <input type="text" placeholder="Type your whatsapp number" id="wa-number"/>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="shipping_address">Shipping Address</label>
+                        <textarea placeholder="Type your shipping address" id="shipping_address" rows={7}/>
+                    </div>
                 </div>
-                <div className="input-group">
-                    <label htmlFor="wa_number">Whatsapp Number</label>
-                    <input type="text" placeholder="Type your whatsapp number" id="wa-number"/>
-                </div>
-                <div className="input-group">
-                    <label htmlFor="shipping_address">Shipping Address</label>
-                    <textarea placeholder="Type your shipping address" id="shipping_address" rows={7}/>
-                </div>
-            </div>
+        
+            </CardWithHeader>
         </div>
     );
 };
