@@ -11,7 +11,7 @@ const PaymenSteps = () => {
     const { push } = useRouter();
 
     const uploadAndConfirm = () => {
-        push("/order-status/123123123");
+        push("/order-status/832893461");
     };
 
     return (
@@ -25,7 +25,7 @@ const PaymenSteps = () => {
                 <FileUpload />
             </div>
 
-            <div className="border-t border-gray-200 py-4">
+            <div className="border-t border-gray-200 p-4">
                 <div className="flex justify-between font-semibold">
                     <div className="text-sm">Total</div>
                     <div className="text-primary text-xs">{priceFormatter(45000)}</div>
