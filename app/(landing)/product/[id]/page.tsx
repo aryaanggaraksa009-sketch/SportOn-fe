@@ -1,15 +1,26 @@
 import Image from "next/image";
 import ProductActions from "../../components/product-detail/product-actions";
 import priceFormatter from "@/app/utils/price-formatter";
+import { getProductDetail } from "@/app/services/product.services";
 
-const ProductDetail = () => {
+type TPageProps = {
+    params: Promise<{id: string}>;
+}
+
+const ProductDetail = async ({params}: TPageProps) => {
+    const {id} = await params;
+
+    const product = await getProductDetail(id);
+
+    console.log(product);
+
   return (
     <main className="container mx-auto py-40 flex gap-12">
         <div className="bg-primary-light aspect-square min-w-140 flex justify-center items-center">
             <Image src="/images/products/product-4.png" width={550} height={550} alt="product 4 image" className="aspect-square object-contain w-full"/>
         </div>
         <div className="w-full py-7">
-            <h1 className="font-bold text-5xl mb-6">SportsOn HyperSoccer v2</h1>
+            <h1 className="font-bold text-5xl mb-6">SportsOn HyperSoccer v2 {id} </h1>
             <div className="bg-primary-light rounded-full text-primary w-fit py-2 px-6 mb-5">
                 Football
             </div>
