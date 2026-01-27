@@ -5,7 +5,7 @@ export async function fetchAPI<T>(
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
         ...options,
         cache: options?.cache || "no-store", // kita set no-store karena kita ingin mendapatkan data lebihreal time atau lebih updated
-    })
+    });
 
     if (!res.ok) {
         let errorMessage = `Failed to fetch data from ${endpoint}`;
