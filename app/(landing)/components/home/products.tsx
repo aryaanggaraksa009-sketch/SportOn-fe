@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../ui/button";
@@ -5,51 +7,20 @@ import { FiPlus } from "react-icons/fi";
 import priceFormatter from "@/app/utils/price-formatter";
 import { Product } from "@/app/types";
 import { getImageUrl } from "@/app/lib/api";
-
-const productList = [
-    {
-        name: "SportOn product 1",
-        category: "Running",
-        price:230000,
-        imgUrl: "product-1.png",
-    },
-    {
-        name: "SportOn product 2",
-        category: "Tennis",
-        price:250000,
-        imgUrl: "product-2.png",
-    },
-     {
-        name: "SportOn product 3",
-        category: "Running",
-        price:350000,
-        imgUrl: "product-3.png",
-    },
-     {
-        name: "SportOn product 4",
-        category: "Football",
-        price:530000,
-        imgUrl: "product-4.png",
-    },
-    {
-        name: "SportOn product 5",
-        category: "Running",
-        price:420000,
-        imgUrl: "product-5.png",
-    },
-     {
-        name: "SportOn product 6",
-        category: "Basketball",
-        price:620000,
-        imgUrl: "product-6.png",
-    },
-];
+import { useCartStore } from "@/app/hooks/use-cart-store";
 
 type TProductsProps = {
     products: Product[]
 }
 
 const ProductsSection = ({products}: TProductsProps) => {
+    const {addItem} = useCartStore();
+
+    const handleAddtoCart = (e: React.MouseEvent, product: Product) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addItem(product);
+    };
 
     return (
         <section id="products-section" className="container mx-auto mt-32 mb-52">
@@ -60,7 +31,7 @@ const ProductsSection = ({products}: TProductsProps) => {
                         <Link href={`/product/${product._id}`} key={product._id} className="p-1.5 bg-white hover:drop-shadow-xl duration-300">
                             <div className="bg-primary-light aspect-square w-full flex justify-center items-center relative">
                                 <Image src={getImageUrl(product.imageUrl)} alt={product.name} width={300} height={300} className="aspect-square object-contain"/>
-                                <Button className="w-10 h-10 p-2! absolute right-3 top-3 ">
+                                <Button className="w-10 h-10 p-2! absolute right-3 top-3 " onClick={(e) => handleAddtoCart(e, product)}>
                                     <FiPlus size={24} />
                                 </Button>
                             </div>
