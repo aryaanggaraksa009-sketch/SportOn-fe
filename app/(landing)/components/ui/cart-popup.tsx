@@ -8,31 +8,6 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/use-cart-store";
 import { getImageUrl } from "@/app/lib/api";
  
-export const cartList = [
-    {
-        name: "SportOn product 1",
-        category: "Running",
-        price:230000,
-        qty: 4,
-        imgUrl: "product-1.png",
-    },
-    {
-        name: "SportOn product 2",
-        category: "Running",
-        price:250000,
-        qty: 2,
-        imgUrl: "product-2.png",
-    },
-     {
-        name: "SportOn product 3",
-        category: "Running",
-        price:350000,
-        qty: 1,
-        imgUrl: "product-3.png",
-    },
- ];
- 
-
 const CartPopup = () => {
     const { push } = useRouter();
     const { items, removeItem } = useCartStore();
