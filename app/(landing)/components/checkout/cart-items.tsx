@@ -9,7 +9,11 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/use-cart-store";
 import { getImageUrl } from "@/app/lib/api";
 
-const CartItems = () => {
+type TCartItems = {
+    handlePayment: () => void;
+};
+
+const CartItems = ({ handlePayment }: TCartItems) => {
     const { items, removeItem } = useCartStore();
     const { push } = useRouter();
 
