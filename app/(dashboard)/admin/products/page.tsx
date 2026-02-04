@@ -2,11 +2,12 @@ import Button from "@/app/(landing)/components/ui/button";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import ProductTable from "../../components/products/products-table";
+import ProductModal from "../../components/products/product-modal";
 
 const ProductManagement = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleClosetModal = () => {
+    const handleCloseModal = () => {
         setIsOpen(false);
     };
 
