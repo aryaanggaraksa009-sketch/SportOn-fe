@@ -3,7 +3,7 @@ import ProductActions from "../../components/product-detail/product-actions";
 import priceFormatter from "@/app/utils/price-formatter";
 import { getProductDetail } from "@/app/services/product.services";
 
-type TPageProps = {
+export type TPageProps = {
     params: Promise<{id: string}>;
 }
 
