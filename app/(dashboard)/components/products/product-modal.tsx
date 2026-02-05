@@ -22,7 +22,7 @@ const ProductModal = ({ isOpen, onClose }: TProductModalProps) => {
                         }} 
                         />
                     </div>
-                    <div className="flex flex-col gap-4 w-full">
+                    <div className="flex flex-col gap-7 w-full">
                         <div className="input-group-admin">
                             <label htmlFor="productName">Product Name</label>
                             <input type="text" id="productName" name="productName" placeholder="e. g. Running" />
@@ -51,7 +51,7 @@ const ProductModal = ({ isOpen, onClose }: TProductModalProps) => {
                 </div>
                 <div className="input-group-admin">
                     <label htmlFor="description">Description</label>
-                    <textarea name="description" id="description"></textarea>
+                    <textarea name="description" id="description" rows={7} placeholder="Product Details..."></textarea>
                 </div>
                 <Button className="ml-auto mt-3 rounded-lg">Create Product</Button>
             </div>
@@ -60,3 +60,4 @@ const ProductModal = ({ isOpen, onClose }: TProductModalProps) => {
 };
 
 export default ProductModal;
+

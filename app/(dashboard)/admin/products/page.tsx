@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/app/(landing)/components/ui/button";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
