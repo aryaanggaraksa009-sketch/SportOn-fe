@@ -1,6 +1,7 @@
 import Button from "@/app/(landing)/components/ui/button";
 import { useState } from "react"
 import Modal from "../ui/modal";
+import ImageUploadPreview from "../ui/image-upload-preview";
 
 type TProductModalProps = {
     isOpen: boolean;
