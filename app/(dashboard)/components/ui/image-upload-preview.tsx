@@ -46,7 +46,7 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                     <span className="text-sm font-medium">Click to Upload</span>
                     </>
                 )}
-                <input type="file" ref={fileInputRef} className="hiddem" accept="image/*" onChange={handleFileChange} />
+                <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
       </div>
     </div>
   );
