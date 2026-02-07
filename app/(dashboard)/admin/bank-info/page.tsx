@@ -1,6 +1,8 @@
 import Button from "@/app/(landing)/components/ui/button";
 import { useState } from "react"
 import { FiPlus } from "react-icons/fi";
+import BankInfoList from "../../components/bank-info/bank-info-list";
+import BankInfoModal from "../../components/bank-info/bank-info-modal";
 
 const BankInfoManagement = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +24,8 @@ const BankInfoManagement = () => {
                     <FiPlus size={24} /> Add Bank Account
                 </Button>
             </div>
+            <BankInfoList />
+            <BankInfoModal isOpen={isOpen} onClose={handleCloseModal} />
         </div>
     );
 };
