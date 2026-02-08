@@ -11,6 +11,11 @@ const bankData = [
         accountNumber: "9398331098",
         accountName: "PT SportOn Digital Indonesia",
     },
+    {
+        bankName: "BRI",
+        accountNumber: "4387164587",
+        accountName: "PT SportOn Digital Indonesia",
+    },
 ];
 
 const BankInfoList = () => {
@@ -51,3 +56,4 @@ const BankInfoList = () => {
 };
 
 export default BankInfoList;
+

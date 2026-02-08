@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/app/(landing)/components/ui/button";
 import { useState } from "react"
 import { FiPlus } from "react-icons/fi";
@@ -13,7 +15,7 @@ const BankInfoManagement = () => {
 
     return (
         <div>
-            <div className="flex justify-center-between items-center mb-10">
+            <div className="flex justify-between items-center mb-10">
                 <div>
                     <h1 className="font-bold text-2xl">Bank Info Management</h1>
                     <p className="opacity-50">
