@@ -17,10 +17,6 @@ const PaymenSteps = () => {
 
     const totalPrice = items.reduce((total, item) => total + item.price * item.qty, 0);
 
-    const uploadAndConfirm = () => {
-        push("/order-status/832893461");
-    };
-
     const handleConfirmPayment =  async () => {
         if (!file) {
             alert("Please upload your payment recipe!");
@@ -54,7 +50,7 @@ const PaymenSteps = () => {
 
             alert("Transaction created succesfully!");
             reset();
-            push(`/order-staus/${res._id}`);
+            push(`/order-status/${res._id}`);
         } catch (error) {
             console.log(error);
         }
@@ -75,7 +71,7 @@ const PaymenSteps = () => {
                     <div className="text-sm">Total</div>
                     <div className="text-primary text-xs">{priceFormatter(45000)}</div>
                 </div>
-                <Button variant="dark" className="w-full mt-4" onClick={uploadAndConfirm}>
+                <Button variant="dark" className="w-full mt-4" onClick={handleConfirmPayment}>
                     <FiCheckCircle /> Upload Recipe & Confirm
                 </Button>
             </div>
@@ -84,3 +80,4 @@ const PaymenSteps = () => {
 };
 
 export default PaymenSteps;
+
