@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const router = useRouter();
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +65,7 @@ const LoginPage = () => {
             placeholder="Please type your email"
             className="rounded-lg!"
             value={email}
-            onChange={(e) => setemail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="input-group-admin mb-12">
@@ -77,7 +77,7 @@ const LoginPage = () => {
             placeholder="••••••••••••••••••••"
             className="rounded-lg!"
             value={password}
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <Button
