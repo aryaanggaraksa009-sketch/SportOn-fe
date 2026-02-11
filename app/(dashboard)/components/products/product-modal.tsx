@@ -2,15 +2,28 @@ import Button from "@/app/(landing)/components/ui/button";
 import { useState } from "react"
 import Modal from "../ui/modal";
 import ImageUploadPreview from "../ui/image-upload-preview";
+import { Category, Product } from "@/app/types";
 
 type TProductModalProps = {
     isOpen: boolean;
     onClose: () => void;
+    onSuccess?: () => void;
+    product?: Product | null;
 };
 
-const ProductModal = ({ isOpen, onClose }: TProductModalProps) => {
+type ProductFormData = {
+    name: string;
+    price: number;
+    stock: number;
+    categoryId: string;
+    description: string;
+};
+
+const ProductModal = ({ isOpen, onClose, onSuccess, product }: TProductModalProps) => {
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Add new product">

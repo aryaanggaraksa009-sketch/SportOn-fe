@@ -6,11 +6,14 @@ import { FiPlus } from "react-icons/fi";
 import ProductTable from "../../components/products/products-table";
 import ProductModal from "../../components/products/product-modal";
 import { Product } from "@/app/types";
-import { getAllProducts } from "@/app/services/product.services";
+import { deleteProduct, getAllProducts } from "@/app/services/product.services";
 
 const ProductManagement = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [products, setProducts] = useState<Product[]>([]);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [productToDeleteId, setProductDeleteId] = useState("");
 
     const fetchProducts = async () => {
         try {
@@ -23,12 +26,37 @@ const ProductManagement = () => {
     }
     };
 
+    const handleEdit = (product: Product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = (id: string) => {
+        setProductDeleteId(id);
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (!productToDeleteId) return;
+        try {
+            await deleteProduct(productToDeleteId);
+            fetchProducts();
+            toast.succes("Product deleted successfully");
+            setIsDeleteModalOpen(false);
+            setProductDeleteId("");
+        } catch (error) {
+            console.error("Failed to delete product", error);
+            toast.error("Failed to delete product");
+        }
+    };
+
     useEffect(() => {
         fetchProducts();
     }, []);
 
     const handleCloseModal = () => {
-        setIsOpen(false);
+        setIsModalOpen(false);
+        setSelectedProduct(null);
     };
 
     return (
@@ -38,13 +66,16 @@ const ProductManagement = () => {
                     <h1 className="font-bold text-2xl"> Product Management</h1>
                     <p className="opacity-50">Manage your inventory, price, and stock.</p>
                 </div>
-                <Button className="rounded-lg" onClick={() => setIsOpen(true)}>
+                <Button className="rounded-lg" onClick={() => setIsModalOpen(true)}>
                     <FiPlus size={24} />
                     Add Product
                 </Button>
             </div>
-            <ProductTable products={products} />
-            <ProductModal isOpen={isOpen} onClose={handleCloseModal} />
+            <ProductTable products={products} onEdit={handleEdit} onDelete={handleDelete}
+             />
+            <ProductModal product={selectedProduct} onSuccess={fetchProducts} isOpen={isModalOpen} onClose={handleCloseModal} 
+            />
+            <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={handleDeleteConfirm} />
         </div>
     );
 };
