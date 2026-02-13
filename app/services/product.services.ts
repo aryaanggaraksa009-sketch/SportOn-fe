@@ -20,12 +20,21 @@ export const createProduct = async (data: FormData): Promise<Product> => {
 };
 
 
+export const updateProduct = async (id: string, data: FormData): Promise<void> => {
+    return await fetchAPI<void>(`/products/${id}`, {
+        method: "PUT",
+        headers: {
+            ...getAuthHeaders(),
+        },
+        body: data,
+    });
+};
+
 export const deleteProduct = async (id: string): Promise<void> => {
     return await fetchAPI<void>(`/products/${id}`, {
         method: "DELETE",
         headers: {
             ...getAuthHeaders(),
         },
-
     });
 };

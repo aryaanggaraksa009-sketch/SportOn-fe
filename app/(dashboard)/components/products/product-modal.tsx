@@ -1,8 +1,12 @@
 import Button from "@/app/(landing)/components/ui/button";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from "../ui/modal";
 import ImageUploadPreview from "../ui/image-upload-preview";
 import { Category, Product } from "@/app/types";
+import { on } from "events";
+import { getAllCategories } from "@/app/services/category.services";
+import { createProduct, updateProduct } from "@/app/services/product.services";
+import { getImageUrl } from "@/app/lib/api";
 
 type TProductModalProps = {
     isOpen: boolean;
@@ -24,6 +28,106 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }: TProductModalProp
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [categories, setCategories] = useState<Category[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const [formData, setFormData] = useState<ProductFormData>({
+        name: "",
+        price: 0,
+        stock: 0,
+        categoryId: "",
+        description: "",
+    });
+
+    const isEditMode = !!product;
+
+    const fetchCategories = async () => {
+        try {
+            const data = await getAllCategories();
+            setCategories(data);
+        } catch (error) {
+            console.error("Failed to fetch categories", error);
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    ) => {
+        const {id, value} = e.target;
+        setFormData((prev) => ({ ...prev, [id]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const data= new FormData();
+            data.append("name", formData.name);
+            data.append("price", formData.price.toString());
+            data.append("stock", formData.stock.toString());
+            data.append("categoryId", formData.categoryId);
+            data.append("description", formData.description);
+            if (imageFile) {
+                data.append("image", imageFile);
+            }
+
+            if (isEditMode) {
+                await updateProduct(product._id, data);
+             } else {
+                await createProduct(data);
+             }
+            
+            setFormData({
+                name: "",
+                price: 0,
+                stock: 0,
+                categoryId: "",
+                description: "",
+            });
+            setImageFile(null);
+            setImagePreview(null);
+
+            toast.success(
+                isEditMode ? "Product updated successfully" : "Product created successfully"
+            );
+
+            onSuccess?.();
+            onClose?.();
+        } catch (error) {
+            console.error (
+                isEditMode ? "Failed to update product" : "Failed to create product", error,
+            );
+            toast.error(
+                isEditMode ? "Failed to update product" : "Failed to create product",
+            );
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isEditMode && isOpen) {
+            setFormData({
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                categoryId: product.category._id,
+                stock: product.stock,
+            });
+            setImagePreview(product.imageUrl ? getImageUrl(product.imageUrl) : null);
+        } else if (isOpen) {
+            setFormData({
+                name: "",
+                price: 0,
+                stock: 0,
+                categoryId: "",
+                description: "",
+            });
+            setImageFile(null);
+            setImagePreview(null);
+        }
+    }, [isOpen, product]);
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Add new product">

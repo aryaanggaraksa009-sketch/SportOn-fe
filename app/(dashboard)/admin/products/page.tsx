@@ -7,6 +7,7 @@ import ProductTable from "../../components/products/products-table";
 import ProductModal from "../../components/products/product-modal";
 import { Product } from "@/app/types";
 import { deleteProduct, getAllProducts } from "@/app/services/product.services";
+import { toast } from "react-toastify";
 
 const ProductManagement = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +42,7 @@ const ProductManagement = () => {
         try {
             await deleteProduct(productToDeleteId);
             fetchProducts();
-            toast.succes("Product deleted successfully");
+            toast.success("Product deleted successfully");
             setIsDeleteModalOpen(false);
             setProductDeleteId("");
         } catch (error) {
