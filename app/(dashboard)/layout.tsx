@@ -35,6 +35,7 @@ export default function RootLayout({
                       <AuthGuard>{children}</AuthGuard>
                       </div>
                 </main>
+                <ToastContainer position="bottom-right" />
             </div>
       </body>
     </html>

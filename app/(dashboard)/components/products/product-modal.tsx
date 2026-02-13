@@ -3,10 +3,10 @@ import { useEffect, useState } from "react"
 import Modal from "../ui/modal";
 import ImageUploadPreview from "../ui/image-upload-preview";
 import { Category, Product } from "@/app/types";
-import { on } from "events";
 import { getAllCategories } from "@/app/services/category.services";
 import { createProduct, updateProduct } from "@/app/services/product.services";
 import { getImageUrl } from "@/app/lib/api";
+import { toast } from "react-toastify";
 
 type TProductModalProps = {
     isOpen: boolean;
