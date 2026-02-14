@@ -73,7 +73,7 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }: TProductModalProp
              } else {
                 await createProduct(data);
              }
-            
+            // Reset From Data
             setFormData({
                 name: "",
                 price: 0,
@@ -130,7 +130,7 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }: TProductModalProp
     }, []);
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title="Add new product">
+        <Modal isOpen={isOpen} onClose={onClose} title={isEditMode ? "Edit Product" : "Add Product"}>
             <div className="flex flex-col gap-6">
                 <div className="flex gap-7">
                     <div className="min-w-50">
