@@ -8,6 +8,7 @@ import ProductModal from "../../components/products/product-modal";
 import { Product } from "@/app/types";
 import { deleteProduct, getAllProducts } from "@/app/services/product.services";
 import { toast } from "react-toastify";
+import DeleteModal from "../../components/ui/delete-modal";
 
 const ProductManagement = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -76,7 +77,8 @@ const ProductManagement = () => {
              />
             <ProductModal product={selectedProduct} onSuccess={fetchProducts} isOpen={isModalOpen} onClose={handleCloseModal} 
             />
-            <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={handleDeleteConfirm} />
+            <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={handleDeleteConfirm}
+            />
         </div>
     );
 };

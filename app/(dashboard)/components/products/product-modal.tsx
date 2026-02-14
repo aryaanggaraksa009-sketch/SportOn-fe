@@ -130,48 +130,95 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }: TProductModalProp
     }, []);
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title={isEditMode ? "Edit Product" : "Add Product"}>
-            <div className="flex flex-col gap-6">
-                <div className="flex gap-7">
-                    <div className="min-w-50">
-                        <ImageUploadPreview label="Product Image" value={imagePreview} onChange={(file) => {
-                            setImageFile(file); setImagePreview(URL.createObjectURL(file));
-                        }} 
-                        />
-                    </div>
-                    <div className="flex flex-col gap-7 w-full">
-                        <div className="input-group-admin">
-                            <label htmlFor="productName">Product Name</label>
-                            <input type="text" id="productName" name="productName" placeholder="e. g. Running" />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="input-group-admin">
-                                <label htmlFor="productPrice">Price (IDR)</label>
-                                <input type="number" id="price" name="price" placeholder="e. g. 700000" />
-                            </div>
-                             <div className="input-group-admin">
-                                <label htmlFor="stock">Stock</label>
-                                <input type="number" id="stock" name="stock" placeholder="e. g. 700" />
-                            </div>
-                        </div>
-                        < div className="input-group-admin">
-                                <label htmlFor="category">Category</label>
-                                <select name="category" id="category">
-                                    <option value="" disabled>
-                                        Select Category
-                                    </option>
-                                    <option value="running">Running</option>
-                                    <option value="football">Football</option>
-                                </select>
-                            </div>
-                    </div>
-                </div>
-                <div className="input-group-admin">
-                    <label htmlFor="description">Description</label>
-                    <textarea name="description" id="description" rows={7} placeholder="Product Details..."></textarea>
-                </div>
-                <Button className="ml-auto mt-3 rounded-lg">Create Product</Button>
+        <Modal isOpen={isOpen} onClose={onClose} title={isEditMode ? "Edit Product" : "Add New Product"}>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <div className="flex gap-7">
+          <div className="min-w-50">
+            <ImageUploadPreview
+              label="Product Image"
+              value={imagePreview}
+              onChange={(file) => {
+                setImageFile(file);
+                setImagePreview(URL.createObjectURL(file));
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-4 w-full">
+            <div className="input-group-admin">
+              <label htmlFor="productName">Product Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="e. g. Running Shoes"
+              />
             </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="input-group-admin">
+                <label htmlFor="productPrice">Price (IDR)</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  placeholder="e. g. 500000"
+                  value={formData.price}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="input-group-admin">
+                <label htmlFor="stock">Stock</label>
+                <input
+                  type="number"
+                  id="stock"
+                  name="stock"
+                  placeholder="e. g. 100"
+                  value={formData.stock}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="input-group-admin">
+              <label htmlFor="category">Category</label>
+              <select
+                name="categoryId"
+                id="categoryId"
+                value={formData.categoryId}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                {categories.map((category) => (
+                  <option value={category._id} key={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="input-group-admin">
+          <label htmlFor="description">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            rows={7}
+            placeholder="Product Details..."
+            value={formData.description}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <Button
+          className="ml-auto mt-3 rounded-lg"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          type="submit"
+        >
+          {isEditMode ? "Update Product" : "Create Product"}
+        </Button>
+      </form>
         </Modal>
     );
 };
